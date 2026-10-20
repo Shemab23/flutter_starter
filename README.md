@@ -107,7 +107,37 @@ flutter test
 
 ---
 
-## 📱 5. Cloud Emulator Builds & Appetize.io
+## 5. Environment Variable Configuration (.env)
+
+This project handles environment configuration profiles using the `flutter_dotenv` ecosystem wrapper.
+
+### 1. File Setup
+Create a file named exactly `.env` directly in your root workspace path (next to your `pubspec.yaml` manifest):
+```env
+API_BASE_URL=https://typicode.com
+APP_DEBUG_MODE=true
+```
+
+### 2. Assets Registration
+Ensure the asset engine references the file path inside your `pubspec.yaml` manifest file rules:
+```yaml
+flutter:
+  assets:
+    - .env
+```
+
+### 3. Consumption in Code
+Extract key mappings anywhere inside your network configuration or state business logic layers like this:
+```dart
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+final String targetUrl = dotenv.env['API_BASE_URL'] ?? 'https://domain.com';
+```
+
+> ⚠️ **Security Notice:** Compiled `.env` configurations are packaged directly within client binaries. Never store internal administrative credentials, server database passwords, or private production payment keys inside this profile. Keep those isolated safely on your backend server.
+---
+
+## 📱 6. Cloud Emulator Builds & Appetize.io
 
 To push and view a native mobile build onto a virtual browser device inside [Appetize.io Platforms](https://docs.appetize.io/ "Appetize Cloud Platform Docs"), execute the appropriate command for the platform you want to verify:
 
@@ -134,7 +164,7 @@ To push and view a native mobile build onto a virtual browser device inside [App
 
 ---
 
-## 🚀 6. Production App Store Submission Framework (2026 Standards)
+## 🚀 7. Production App Store Submission Framework (2026 Standards)
 
 Once your application is fully validated via cloud emulation testing, follow these deployment steps to submit your apps to the official stores:
 
